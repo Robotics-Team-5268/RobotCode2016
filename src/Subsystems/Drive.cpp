@@ -62,7 +62,7 @@ speedController4->Set(-rightSpeed);
 float Drive::returnAngle(){
 	return gyro->GetAngle();
 }
-AnalogGyro* Drive::getGyro()
+ADXRS450_Gyro* Drive::getGyro()
 {
 	return Robot::drive->gyro.get();
 }
