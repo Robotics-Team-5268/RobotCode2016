@@ -3,13 +3,6 @@
 #define ROBOTMAP_H
 #include "WPILib.h"
 
-/**
- * The RobotMap is a mapping from the ports sensors and actuators are wired into
- * to a variable name. This provides flexibility changing wiring, makes checking
- * the wiring easier and significantly reduces the number of magic numbers
- * floating around.
- */
-
 #define DRIVE_SPEED_CONTROLLER_1_CHANNEL 		0
 #define DRIVE_SPEED_CONTROLLER_2_CHANNEL 		1
 #define DRIVE_SPEED_CONTROLLER_3_CHANNEL 		2
@@ -30,6 +23,7 @@ public:
 	static std::shared_ptr<CANTalon> shooterSpeedController;
 	static std::shared_ptr<CANTalon> fetcherSpeedController;
 	static std::shared_ptr<Talon> fetcherWheelSpeedController;
+	static std::shared_ptr<DigitalInput> shooterDigitalInput;
 	static void init();
 };
 #endif // ROBOTMAP_H

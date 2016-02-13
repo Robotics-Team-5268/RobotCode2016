@@ -14,6 +14,7 @@ std::shared_ptr<CANTalon> RobotMap::shooterSpeedController;
 std::shared_ptr<CANTalon> RobotMap::fetcherSpeedController;
 std::shared_ptr<Talon> RobotMap::fetcherWheelSpeedController;
 
+
 void RobotMap::init() {
     LiveWindow *lw = LiveWindow::GetInstance();
 
@@ -42,6 +43,6 @@ void RobotMap::init() {
     shooterSpeedController.reset(new CANTalon(SHOOTER_SPEED_CONTROLLER_CHANNEL));
     fetcherSpeedController.reset(new CANTalon(FETCHER_SPEED_CONTROLLER_CHANNEL));
     fetcherWheelSpeedController.reset(new Talon(FETCHER_WHEEL_SPEED_CONTROLLER_CHANNEL));
-    shooterSpeedController->SetControlMode(CANSpeedController::kPosition);
-    shooterSpeedController->SetPID(.3, .003, 3.0, 0.0);
+    //shooterSpeedController->SetControlMode(CANSpeedController::kSpeed);
+    //shooterSpeedController->SetPID(.3, .003, 3.0, 0.0);
 }

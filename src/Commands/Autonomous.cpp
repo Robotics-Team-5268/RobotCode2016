@@ -1,9 +1,3 @@
-/*
- * Autonomous.cpp
- *
- *  Created on: Feb 6, 2016
- *      Author: OSCase
- */
 
 #include "Autonomous.h"
 #include "Commands/Move.h"

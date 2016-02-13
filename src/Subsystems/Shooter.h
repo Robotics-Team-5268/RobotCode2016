@@ -14,8 +14,11 @@ public:
 	Shooter();
 	void InitDefaultCommand();
 	void AddSmartDashboardItems();
-	void setPosition(double distance);
+	void setSpeed(double sp);
 	void takeInput();
+	bool getLimitSwitch();
+	void resetPosition();
+	double getTalonPosition();
 };
 
 #endif // SHOOTER_H
