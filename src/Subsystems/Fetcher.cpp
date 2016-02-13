@@ -42,3 +42,10 @@ fetcherCANTalon->Set(speed);
 void Fetcher::setTalonSpeed(double speed){
 fetcherTalon->Set(speed);
 }
+bool Fetcher::checkIfFinished(bool a)
+{
+	if((fetcherCANTalon->IsFwdLimitSwitchClosed() && a)
+	|| (fetcherCANTalon->IsRevLimitSwitchClosed() && !a))
+		return true;
+	return false;
+}
