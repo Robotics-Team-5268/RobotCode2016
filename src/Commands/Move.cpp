@@ -7,7 +7,7 @@ Move::Move(): CommandBase(), seconds(), speed() {
 Move::Move(float tm, float spd): CommandBase() {
 	// Use requires() here to declare subsystem dependencies
 	// eg. requires(chassis);
-	Requires(CommandBase::drive.get());
+	Command::Requires(drive.get());
 	seconds = tm;
 	speed = spd;
 }
@@ -23,7 +23,7 @@ void Move::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool Move::IsFinished() {
-	if(seconds -TimeSinceInitialized() <= 0)
+	if(seconds -Command::TimeSinceInitialized() <= 0)
 	{
 		return true;
 	}

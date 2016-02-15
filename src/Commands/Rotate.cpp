@@ -7,7 +7,7 @@ Rotate::Rotate(): CommandBase(), degrees(), gyroAngle(), pid() {
 Rotate::Rotate(float amount): CommandBase(), gyroAngle(0) {
 	// Use requires() here to declare subsystem dependencies
 	// eg. requires(chassis);
-	Requires(drive.get());
+	Command::Requires(drive.get());
 	pid = nullptr;
 	degrees = amount;
 }
