@@ -12,13 +12,13 @@
 #ifndef DRIVEWITHBUTTON_H
 #define DRIVEWITHBUTTON_H
 
-
+#include "../CommandBase.h"
 #include "Commands/Subsystem.h"
 #include "../Robot.h"
 
-class driveWithButton: public Command {
+class DriveWithButton: public CommandBase {
 public:
-	driveWithButton();
+	DriveWithButton();
 
 	virtual void Initialize();
 	virtual void Execute();

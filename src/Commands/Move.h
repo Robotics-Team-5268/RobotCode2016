@@ -2,11 +2,11 @@
 #ifndef MOVE_H
 #define MOVE_H
 
-
+#include "../CommandBase.h"
 #include "Commands/Subsystem.h"
 #include "../Robot.h"
 
-class Move: public Command {
+class Move: public CommandBase {
 private:
 	Move();
 public:

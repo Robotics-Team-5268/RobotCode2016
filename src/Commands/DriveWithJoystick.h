@@ -2,13 +2,13 @@
 #ifndef DRIVEWITHJOYSTICK_H
 #define DRIVEWITHJOYSTICK_H
 
-
+#include "../CommandBase.h"
 #include "Commands/Subsystem.h"
 #include "../Robot.h"
 
-class driveWithJoystick: public Command {
+class DriveWithJoystick: public CommandBase {
 public:
-	driveWithJoystick();
+	DriveWithJoystick();
 
 	virtual void Initialize();
 	virtual void Execute();

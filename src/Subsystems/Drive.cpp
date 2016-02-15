@@ -9,10 +9,10 @@
 // it from being updated in the future.
 
 
+#include <Commands/DriveWithJoystick.h>
 #include "Robot.h"
 #include "Drive.h"
 #include "../RobotMap.h"
-#include "Commands/driveWithJoystick.h"
 
 Drive::Drive() : Subsystem("Drive"){
     speedController1 = RobotMap::driveSpeedController1;
@@ -34,13 +34,13 @@ void Drive::AddSmartDashboardItems()
 }
 void Drive::InitDefaultCommand() {
     // Set the default command for a subsystem here.
-	SetDefaultCommand(new driveWithJoystick());
+	SetDefaultCommand(new DriveWithJoystick());
 }
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
 
 void Drive::takeInput(){
-	robotDrive4->ArcadeDrive((-Robot::oi->getJoystick1()->GetY()), -Robot::oi->getJoystick1()->GetX()/2);
+	robotDrive4->ArcadeDrive((-CommandBase::oi->getJoystick1()->GetY()), -CommandBase::oi->getJoystick1()->GetX()/2);
 }
 void Drive::setMotors(float leftSpeed, float rightSpeed){
 speedController1->Set(leftSpeed);
@@ -53,6 +53,6 @@ float Drive::returnAngle(){
 }
 ADXRS450_Gyro* Drive::getGyro()
 {
-	return Robot::drive->gyro.get();
+	return gyro.get();
 }
 

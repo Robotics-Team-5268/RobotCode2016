@@ -24,6 +24,12 @@ public:
 	static std::shared_ptr<CANTalon> fetcherSpeedController;
 	static std::shared_ptr<Talon> fetcherWheelSpeedController;
 	static std::shared_ptr<DigitalInput> shooterDigitalInput;
+
+	static std::shared_ptr<Relay> ledRelay1;
+	static std::shared_ptr<Relay> ledRelay2;
+	static std::shared_ptr<Relay> ledRelay3;
+	static std::shared_ptr<Relay> ledRelay4;
+
 	static void init();
 };
 #endif // ROBOTMAP_H

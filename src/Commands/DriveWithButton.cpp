@@ -1,36 +1,35 @@
 
-#include <Commands/driveWithJoystick.h>
-#include <Subsystems/Drive.h>
+#include <Commands/DriveWithButton.h>
 
 
-driveWithJoystick::driveWithJoystick(): Command() {
+DriveWithButton::DriveWithButton(): CommandBase() {
         // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-	Requires(Robot::drive.get());
+	Requires(drive.get());
 }
 
 // Called just before this Command runs the first time
-void driveWithJoystick::Initialize() {
+void DriveWithButton::Initialize() {
 
 }
 
 // Called repeatedly when this Command is scheduled to run
-void driveWithJoystick::Execute() {
-Robot::drive->takeInput();
+void DriveWithButton::Execute() {
+	drive->setMotors(1, 1);
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool driveWithJoystick::IsFinished() {
-return true;
+bool DriveWithButton::IsFinished() {
+	return true;
 }
 
 // Called once after isFinished returns true
-void driveWithJoystick::End() {
-
+void DriveWithButton::End() {
+	drive->setMotors(0, 0);
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void driveWithJoystick::Interrupted() {
+void DriveWithButton::Interrupted() {
 
 }

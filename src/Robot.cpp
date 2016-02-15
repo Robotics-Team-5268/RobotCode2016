@@ -1,25 +1,19 @@
 
 #include "Robot.h"
 
-std::shared_ptr<Drive> Robot::drive;
-std::unique_ptr<OI> Robot::oi;
-std::shared_ptr<Shooter> Robot::shooter;
-std::shared_ptr<Fetcher> Robot::fetcher;
 std::unique_ptr<Command> Robot::autonomousCommand;
+
 void Robot::RobotInit() {
 	RobotMap::init();
-    drive.reset(new Drive());
-	oi.reset(new OI());
-	shooter.reset(new Shooter());
-	fetcher.reset(new Fetcher());
+	CommandBase::init();
 	// This MUST be here. If the OI creates Commands (which it very likely
 	// will), constructing it during the construction of CommandBase (from
 	// which commands extend), subsystems are not guaranteed to be
 	// yet. Thus, their requires() statements may grab null pointers. Bad
 	// news. Don't move it.
 
-	lw->AddActuator("Drive", "Drive Gyro", drive->getGyro());
-	drive->safetyOff();
+	lw->AddActuator("Drive", "Drive Gyro", CommandBase::drive->getGyro());
+	CommandBase::drive->safetyOff();
 
 	//instantiate the command used for the autonomous period
 	autonomousCommand.reset(new Autonomous());
@@ -48,7 +42,7 @@ void Robot::AutonomousInit() {
 
 void Robot::AutonomousPeriodic() {
 	Scheduler::GetInstance()->Run();
-	drive->AddSmartDashboardItems();
+	CommandBase::drive->AddSmartDashboardItems();
 }
 
 void Robot::TeleopInit() {
@@ -60,12 +54,12 @@ void Robot::TeleopInit() {
 	{
 		autonomousCommand->Cancel();
 	}
-	drive->getGyro()->Reset();
+	CommandBase::drive->getGyro()->Reset();
 }
 
 void Robot::TeleopPeriodic() {
 	Scheduler::GetInstance()->Run();
-	drive->AddSmartDashboardItems();
+	CommandBase::drive->AddSmartDashboardItems();
 }
 
 void Robot::TestPeriodic() {

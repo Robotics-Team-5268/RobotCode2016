@@ -6,7 +6,7 @@
 #include "Commands/Subsystem.h"
 #include "../Robot.h"
 
-class Shoot: public Command {
+class Shoot: public CommandBase {
 public:
 	Shoot();
 

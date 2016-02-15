@@ -1,14 +1,13 @@
 
 #include "Commands/Rotate.h"
-#include "Subsystems/Drive.h"
 
-Rotate::Rotate(): Command(), degrees(), gyroAngle(), pid() {
+Rotate::Rotate(): CommandBase(), degrees(), gyroAngle(), pid() {
 
 }
-Rotate::Rotate(float amount): Command(), gyroAngle(0) {
+Rotate::Rotate(float amount): CommandBase(), gyroAngle(0) {
 	// Use requires() here to declare subsystem dependencies
 	// eg. requires(chassis);
-	Requires(Robot::drive.get());
+	Requires(drive.get());
 	pid = nullptr;
 	degrees = amount;
 }
@@ -32,7 +31,7 @@ void Rotate::Execute() {
 							SmartDashboard::GetNumber("I", .005),
 							SmartDashboard::GetNumber("D", .01),
 							SmartDashboard::GetNumber("F", 0),
-							Robot::drive->getGyro(),
+							drive->getGyro(),
 							new RotatePIDOutput());
 		pid->SetInputRange(-180, 180);
 		pid->SetOutputRange(-.5, .5);
@@ -83,6 +82,6 @@ End();
 }
 void RotatePIDOutput::PIDWrite(float a)
 {
-Robot::drive->setMotors(a, -a);
+	CommandBase::drive->setMotors(a, -a);
 }
 RotatePIDOutput::~RotatePIDOutput(){}

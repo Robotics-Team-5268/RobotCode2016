@@ -3,6 +3,10 @@
 
 // Initialize a single static instance of all of your subsystems to NULL
 std::unique_ptr<OI> CommandBase::oi;
+std::unique_ptr<Drive> CommandBase::drive;
+std::unique_ptr<Fetcher> CommandBase::fetcher;
+std::unique_ptr<LEDController> CommandBase::leds;
+std::unique_ptr<Shooter> CommandBase::shooter;
 
 CommandBase::CommandBase(const std::string &name) :
 		Command(name)
@@ -17,9 +21,9 @@ CommandBase::CommandBase() :
 
 void CommandBase::init()
 {
-	// Create a single static instance of all of your subsystems. The following
-	// line should be repeated for each subsystem in the project.
-	//examplesubsystem.reset(new ExampleSubsystem());
-
+	drive.reset(new Drive());
 	oi.reset(new OI());
+	shooter.reset(new Shooter());
+	fetcher.reset(new Fetcher());
+	leds.reset(new LEDController());
 }

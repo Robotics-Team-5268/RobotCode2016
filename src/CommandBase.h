@@ -5,6 +5,10 @@
 #include "Commands/Command.h"
 #include "OI.h"
 #include "WPILib.h"
+#include "Subsystems/Drive.h"
+#include "Subsystems/Fetcher.h"
+#include "Subsystems/LEDController.h"
+#include "Subsystems/Shooter.h"
 
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
@@ -19,7 +23,10 @@ public:
 	static void init();
 	// Create a single static instance of all of your subsystems
 	static std::unique_ptr<OI> oi;
-
+	static std::unique_ptr<Drive> drive;
+	static std::unique_ptr<Fetcher> fetcher;
+	static std::unique_ptr<LEDController> leds;
+	static std::unique_ptr<Shooter> shooter;
 };
 
 #endif

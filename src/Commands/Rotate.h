@@ -2,11 +2,11 @@
 #ifndef ROTATE_H
 #define ROTATE_H
 
-
+#include "../CommandBase.h"
 #include "Commands/Subsystem.h"
 #include "../Robot.h"
 
-class Rotate: public Command {
+class Rotate: public CommandBase {
 private:
 	Rotate();
 public:

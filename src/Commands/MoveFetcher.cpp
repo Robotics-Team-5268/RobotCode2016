@@ -1,17 +1,16 @@
 
 #include "Commands/MoveFetcher.h"
-#include "Subsystems/Fetcher.h"
 
-MoveFetcher::MoveFetcher(): Command(), isOut(true) {
+MoveFetcher::MoveFetcher(): CommandBase(), isOut(true) {
         // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-	Requires(Robot::fetcher.get());
+	Requires(fetcher.get());
 }
 
-MoveFetcher::MoveFetcher(bool oOrI): Command(), isOut(true) {
+MoveFetcher::MoveFetcher(bool oOrI): CommandBase(), isOut(true) {
         // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-	Requires(Robot::fetcher.get());
+	Requires(fetcher.get());
 	isOut = oOrI;
 }
 
@@ -27,14 +26,15 @@ void MoveFetcher::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool MoveFetcher::IsFinished() {
-return Robot::fetcher->checkIfFinished(isOut);
+	return fetcher->checkIfFinished(isOut);
 }
 
 // Called once after isFinished returns true
 void MoveFetcher::End() {
-Robot::fetcher->setCANTalonSpeed(0);
-if(isOut)
-	Robot::fetcher->setTalonSpeed(1);
+	fetcher->setCANTalonSpeed(0);
+	if(isOut){
+		fetcher->setTalonSpeed(1);
+	}
 }
 
 // Called when another command which requires one or more of the same
