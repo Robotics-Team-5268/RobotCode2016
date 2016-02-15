@@ -5,8 +5,6 @@ Rotate::Rotate(): CommandBase(), degrees(), gyroAngle(), pid() {
 
 }
 Rotate::Rotate(float amount): CommandBase(), gyroAngle(0) {
-	// Use requires() here to declare subsystem dependencies
-	// eg. requires(chassis);
 	Command::Requires(drive.get());
 	pid = nullptr;
 	degrees = amount;
@@ -78,7 +76,7 @@ void Rotate::End() {
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void Rotate::Interrupted() {
-End();
+	End();
 }
 void RotatePIDOutput::PIDWrite(float a)
 {

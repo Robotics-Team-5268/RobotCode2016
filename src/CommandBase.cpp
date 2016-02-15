@@ -22,8 +22,10 @@ CommandBase::CommandBase() :
 void CommandBase::init()
 {
 	drive.reset(new Drive());
-	oi.reset(new OI());
 	shooter.reset(new Shooter());
 	fetcher.reset(new Fetcher());
 	leds.reset(new LEDController());
+
+	// Keep at the end
+	oi.reset(new OI());
 }

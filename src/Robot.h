@@ -12,7 +12,6 @@
 class Robot : public IterativeRobot {
 public:
 	static std::unique_ptr<Command> autonomousCommand;
-	//Autonomous autonomousCommand;
 	LiveWindow *lw = LiveWindow::GetInstance();
 
 	virtual void RobotInit();

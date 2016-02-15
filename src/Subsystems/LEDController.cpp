@@ -1,8 +1,7 @@
 #include "LEDController.h"
 #include "../RobotMap.h"
 
-LEDController::LEDController() :
-		Subsystem("ExampleSubsystem")
+LEDController::LEDController() : Subsystem("LEDController")
 {
 	ledRelay1 = RobotMap::ledRelay1;
 	ledRelay2 = RobotMap::ledRelay2;

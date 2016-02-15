@@ -20,10 +20,11 @@ void Shoot::Execute() {
 			return;
 	}
 	shooter->setSpeed(1);
-	if(!shooter->getLimitSwitch() && state == SwitchClosed)
+	if(!shooter->getLimitSwitch() && state == SwitchClosed){
 		state = SwitchOpen;
-	else if(shooter->getLimitSwitch() && state == SwitchOpen)
+	}else if(shooter->getLimitSwitch() && state == SwitchOpen){
 		state = armed;
+	}
 
 }
 

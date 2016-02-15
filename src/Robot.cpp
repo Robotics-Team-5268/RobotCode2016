@@ -6,11 +6,6 @@ std::unique_ptr<Command> Robot::autonomousCommand;
 void Robot::RobotInit() {
 	RobotMap::init();
 	CommandBase::init();
-	// This MUST be here. If the OI creates Commands (which it very likely
-	// will), constructing it during the construction of CommandBase (from
-	// which commands extend), subsystems are not guaranteed to be
-	// yet. Thus, their requires() statements may grab null pointers. Bad
-	// news. Don't move it.
 
 	lw->AddActuator("Drive", "Drive Gyro", CommandBase::drive->getGyro());
 	CommandBase::drive->safetyOff();

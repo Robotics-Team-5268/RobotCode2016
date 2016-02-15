@@ -16,10 +16,10 @@ void Fetcher::InitDefaultCommand() {
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
 void Fetcher::setCANTalonSpeed(double speed){
-fetcherCANTalon->Set(speed);
+	fetcherCANTalon->Set(speed);
 }
 void Fetcher::setTalonSpeed(double speed){
-fetcherTalon->Set(speed);
+	fetcherTalon->Set(speed);
 }
 bool Fetcher::checkIfFinished(bool a)
 {
