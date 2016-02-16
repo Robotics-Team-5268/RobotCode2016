@@ -5,6 +5,7 @@ Shoot::Shoot(): CommandBase(), state(SwitchClosed){
 	// Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
 	Requires(shooter.get());
+	Requires(fetcher.get());
 }
 
 // Called just before this Command runs the first time
@@ -14,9 +15,9 @@ void Shoot::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void Shoot::Execute() {
-	if(fetcher->getLimitSwitch()) // In case the drawer is in while the shoot command is running.
+	if(!fetcher->isDrawerOut()) // In case the drawer is in while the shoot command is running.
 	{
-			End();
+			//End();
 			return;
 	}
 	shooter->setSpeed(1);
@@ -25,12 +26,11 @@ void Shoot::Execute() {
 	}else if(shooter->getLimitSwitch() && state == SwitchOpen){
 		state = armed;
 	}
-
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool Shoot::IsFinished() {
-	return (state == armed);
+	return (state == armed || !fetcher->isDrawerOut());
 }
 
 // Called once after isFinished returns true

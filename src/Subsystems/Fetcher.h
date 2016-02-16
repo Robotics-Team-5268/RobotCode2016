@@ -20,6 +20,7 @@ public:
 	void takeInput();
 	bool checkIfFinished(bool a);
 	bool getLimitSwitch();
+	bool isDrawerOut();
 };
 
 #endif //No comment

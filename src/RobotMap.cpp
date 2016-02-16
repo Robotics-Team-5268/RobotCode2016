@@ -44,6 +44,7 @@ void RobotMap::init() {
 
     driveGyro.reset(new ADXRS450_Gyro(SPI::kOnboardCS0));
     driveGyro->Calibrate();
+    lw->AddActuator("Drive", "Drive Gyro", driveGyro);
     shooterSpeedController.reset(new CANTalon(SHOOTER_SPEED_CONTROLLER_CHANNEL));
     fetcherSpeedController.reset(new CANTalon(FETCHER_SPEED_CONTROLLER_CHANNEL));
     fetcherWheelSpeedController.reset(new Talon(FETCHER_WHEEL_SPEED_CONTROLLER_CHANNEL));

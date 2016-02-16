@@ -9,6 +9,7 @@
 #include "Subsystems/Fetcher.h"
 #include "Subsystems/LEDController.h"
 #include "Subsystems/Shooter.h"
+#include "Subsystems/Targeting.h"
 
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
@@ -27,6 +28,7 @@ public:
 	static std::unique_ptr<Fetcher> fetcher;
 	static std::unique_ptr<LEDController> leds;
 	static std::unique_ptr<Shooter> shooter;
+	static std::unique_ptr<Targeting> targeting;
 };
 
 #endif

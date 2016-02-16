@@ -4,10 +4,12 @@
 std::unique_ptr<Command> Robot::autonomousCommand;
 
 void Robot::RobotInit() {
+	//start grip
+	system("/home/lvuser/grip &");
+
 	RobotMap::init();
 	CommandBase::init();
 
-	lw->AddActuator("Drive", "Drive Gyro", CommandBase::drive->getGyro());
 	CommandBase::drive->safetyOff();
 
 	//instantiate the command used for the autonomous period

@@ -6,15 +6,15 @@
 
 class OI {
 private:
-	std::shared_ptr<Joystick> joystick1;
-	std::shared_ptr<JoystickButton> joystickButton1;
-	std::shared_ptr<JoystickButton> joystickButton2;
+	std::shared_ptr<Joystick> driverJoystick, shooterJoystick;
+	std::vector<JoystickButton> driverBtns, shooterBtns;
 public:
 	OI();
 
-	std::shared_ptr<Joystick> getJoystick1();
-	bool getButton1Pressed();
-	bool getButton2Pressed();
+	std::shared_ptr<Joystick> getDriverJoystick();
+	std::shared_ptr<Joystick> getShooterJoystick();
+	bool getDriverButtonPressed(int btnNum);
+	bool getShooterButtonPressed(int btnNum);
 };
 
 #endif

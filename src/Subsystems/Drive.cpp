@@ -30,7 +30,7 @@ void Drive::InitDefaultCommand() {
 // here. Call these from Commands.
 
 void Drive::takeInput(){
-	robotDrive4->ArcadeDrive((-CommandBase::oi->getJoystick1()->GetY()), -CommandBase::oi->getJoystick1()->GetX()/2);
+	robotDrive4->ArcadeDrive((-CommandBase::oi->getDriverJoystick()->GetY()), -CommandBase::oi->getDriverJoystick()->GetX()/2);
 }
 void Drive::setMotors(float leftSpeed, float rightSpeed){
 	speedController1->Set(leftSpeed);

@@ -7,6 +7,7 @@ std::unique_ptr<Drive> CommandBase::drive;
 std::unique_ptr<Fetcher> CommandBase::fetcher;
 std::unique_ptr<LEDController> CommandBase::leds;
 std::unique_ptr<Shooter> CommandBase::shooter;
+std::unique_ptr<Targeting> CommandBase::targeting;
 
 CommandBase::CommandBase(const std::string &name) :
 		Command(name)
@@ -25,6 +26,7 @@ void CommandBase::init()
 	shooter.reset(new Shooter());
 	fetcher.reset(new Fetcher());
 	leds.reset(new LEDController());
+	targeting.reset(new Targeting());
 
 	// Keep at the end
 	oi.reset(new OI());

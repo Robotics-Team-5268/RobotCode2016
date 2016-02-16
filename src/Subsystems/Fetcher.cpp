@@ -21,14 +21,17 @@ void Fetcher::setCANTalonSpeed(double speed){
 void Fetcher::setTalonSpeed(double speed){
 	fetcherTalon->Set(speed);
 }
-bool Fetcher::checkIfFinished(bool a)
+bool Fetcher::checkIfFinished(bool out)
 {
-	if((fetcherCANTalon->IsFwdLimitSwitchClosed() && a)
-	|| (fetcherCANTalon->IsRevLimitSwitchClosed() && !a))
+	if((fetcherCANTalon->IsFwdLimitSwitchClosed() && out)
+	|| (fetcherCANTalon->IsRevLimitSwitchClosed() && !out))
 		return true;
 	return false;
 }
 bool Fetcher::getLimitSwitch()
 {
 	return fetcherCANTalon->IsRevLimitSwitchClosed();
+}
+bool Fetcher::isDrawerOut(){
+	return fetcherCANTalon->IsFwdLimitSwitchClosed();
 }
