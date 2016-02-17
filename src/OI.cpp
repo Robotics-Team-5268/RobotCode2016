@@ -17,8 +17,8 @@ OI::OI() {
     	shooterBtns.push_back(JoystickButton(shooterJoystick.get(), i));
     }
 
-    shooterBtns[0].WhileHeld(new MoveFetcher(true));
-    shooterBtns[1].WhileHeld(new MoveFetcher(false));
+    shooterBtns[0].WhenPressed(new MoveFetcher(true));
+    shooterBtns[1].WhenPressed(new MoveFetcher(false));
 
     // SmartDashboard Buttons
     SmartDashboard::PutData("Rotate", new Rotate(90));

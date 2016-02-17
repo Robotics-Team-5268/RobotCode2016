@@ -7,6 +7,7 @@ MoveFetcher::MoveFetcher(): CommandBase(), isOut(true) {
 	Requires(fetcher.get());
 	// Makes sure that the shooter is not doing anything while the fetcher is moving
 	Requires(shooter.get());
+	SetTimeout(6);
 }
 
 MoveFetcher::MoveFetcher(bool oOrI): CommandBase() {
@@ -32,14 +33,21 @@ void MoveFetcher::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool MoveFetcher::IsFinished() {
-	return true;//fetcher->checkIfFinished(isOut);
+	if(fetcher->checkIfFinished(isOut)){
+		fetcher->setCANTalonSpeed(0);
+	}
+	if(isOut == false && !oi->getShooterButtonPressed(1)){
+		return true;
+	}
+	else if(isOut && !oi->getShooterButtonPressed(0)){
+		return true;
+	}
+	return false;//fetcher->checkIfFinished(isOut);
 }
 
 // Called once after isFinished returns true
 void MoveFetcher::End() {
-	if(Command::IsCanceled()){
-		fetcher->setCANTalonSpeed(0);
-	}
+	fetcher->setCANTalonSpeed(0);
 	fetcher->setTalonSpeed(isOut ? 1 : 0);
 }
 

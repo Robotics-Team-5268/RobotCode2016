@@ -90,8 +90,11 @@ bool Targeting::calculateIsHot()
 			bestContour = contours[i];
 		}
 	}
-	if(( ((float)(7/6) * 360 ) / ( 2 * bestContour.height * 0.66439841151)) > 20 ) // 0.66439841151 is tan(33.6), the 20 is distance in
-		return false;															   // feet to the goal.
+	// 0.66439841151 is tan(33.6), the 20 is distance in
+	// feet to the goal.
+	double absDistance = ((7.0/6.0 * 360.0) / ( 2 * bestContour.height * 0.66439841151));
+	if( pow(absDistance, 2) - pow((85.0/12.0 - 1), 2) > 255 ) // Square of the max distance: 255 -- to be changed, height of tower: 7 1/12
+		return false;										  // 1 is the height of the camera--to be changed
 
 
 	return false;
