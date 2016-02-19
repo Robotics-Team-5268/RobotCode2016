@@ -4,6 +4,7 @@
 Fetcher::Fetcher() : Subsystem("Fetcher"){
     fetcherCANTalon = RobotMap::fetcherSpeedController;
     fetcherTalon = RobotMap::fetcherWheelSpeedController;
+    fetcherCANTalon->SetSafetyEnabled(false);
 }
 void Fetcher::AddSmartDashboardItems()
 {
@@ -24,13 +25,18 @@ void Fetcher::setTalonSpeed(double speed){
 bool Fetcher::checkIfFinished(bool out)
 {
 	if((fetcherCANTalon->IsFwdLimitSwitchClosed() && out)
-	|| (fetcherCANTalon->IsRevLimitSwitchClosed() && !out))
+	|| (fetcherCANTalon->IsRevLimitSwitchClosed() && !out)){
 		return true;
+	}
 	return false;
 }
-bool Fetcher::getLimitSwitch()
+bool Fetcher::getLimitSwitch(bool a)
 {
-	return fetcherCANTalon->IsRevLimitSwitchClosed();
+	SmartDashboard::PutNumber("CAN Talon 1", fetcherCANTalon->Get());
+	if(a)
+		return fetcherCANTalon->IsFwdLimitSwitchClosed();
+	else
+		return fetcherCANTalon->IsRevLimitSwitchClosed();
 }
 bool Fetcher::isDrawerOut(){
 	return fetcherCANTalon->IsFwdLimitSwitchClosed();

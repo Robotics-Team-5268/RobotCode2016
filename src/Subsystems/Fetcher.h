@@ -19,7 +19,7 @@ public:
 	void setTalonSpeed(double speed);
 	void takeInput();
 	bool checkIfFinished(bool a);
-	bool getLimitSwitch();
+	bool getLimitSwitch(bool a);
 	bool isDrawerOut();
 };
 

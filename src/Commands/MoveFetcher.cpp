@@ -36,10 +36,10 @@ bool MoveFetcher::IsFinished() {
 	if(fetcher->checkIfFinished(isOut)){
 		fetcher->setCANTalonSpeed(0);
 	}
-	if(isOut == false && !oi->getShooterButtonPressed(1)){
+	if(isOut == false && !oi->getShooterButtonPressed(2)){
 		return true;
 	}
-	else if(isOut && !oi->getShooterButtonPressed(0)){
+	else if(isOut && !oi->getShooterButtonPressed(1)){
 		return true;
 	}
 	return false;//fetcher->checkIfFinished(isOut);

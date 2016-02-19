@@ -7,7 +7,7 @@
 class OI {
 private:
 	std::shared_ptr<Joystick> driverJoystick, shooterJoystick;
-	std::vector<JoystickButton> driverBtns, shooterBtns;
+	std::vector<JoystickButton*> driverBtns, shooterBtns;
 public:
 	OI();
 

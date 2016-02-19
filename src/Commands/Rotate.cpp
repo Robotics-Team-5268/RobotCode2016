@@ -24,6 +24,7 @@ void Rotate::Execute() {
 		SmartDashboard::PutNumber("D", pid->GetD());
 		SmartDashboard::PutNumber("F", pid->GetF());
 	}else{
+		/*
 		pid = new PIDController(
 							SmartDashboard::GetNumber("P", .03),
 							SmartDashboard::GetNumber("I", .005),
@@ -36,6 +37,7 @@ void Rotate::Execute() {
 		pid->SetAbsoluteTolerance(3);
 		pid->Enable();
 		pid->SetSetpoint(degrees);
+		*/
 	}
 
 
