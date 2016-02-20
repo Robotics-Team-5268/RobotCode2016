@@ -9,7 +9,7 @@
 class MoveFetcher: public CommandBase {
 public:
 
-	MoveFetcher(bool oOrI); // 0 = in, 1 = out
+	MoveFetcher(bool oOrI, bool runW = true); // 0 = in, 1 = out
 	virtual void Initialize();
 	virtual void Execute();
 	virtual bool IsFinished();
@@ -18,6 +18,7 @@ public:
 private:
 	MoveFetcher();
 	bool isOut;
+	bool runWheel;
 };
 
 #endif

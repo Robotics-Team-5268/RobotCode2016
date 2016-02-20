@@ -4,6 +4,7 @@
 #include "Commands/Rotate.h"
 #include "Commands/Move.h"
 #include "Commands/MoveFetcher.h"
+#include "Commands/ShootMoveFetcher.h"
 #include "SmartDashboard/SmartDashboard.h"
 
 
@@ -19,6 +20,7 @@ OI::OI() {
 
     shooterBtns[0]->WhenPressed(new MoveFetcher(true));
     shooterBtns[1]->WhenPressed(new MoveFetcher(false));
+    shooterBtns[2]->WhenPressed(new ShootMoveFetcher());
 
     // SmartDashboard Buttons
     SmartDashboard::PutData("Rotate", new Rotate(90));

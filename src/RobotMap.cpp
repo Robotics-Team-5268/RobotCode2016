@@ -19,6 +19,8 @@ std::shared_ptr<Relay> RobotMap::ledRelay2;
 std::shared_ptr<Relay> RobotMap::ledRelay3;
 std::shared_ptr<Relay> RobotMap::ledRelay4;
 
+std::shared_ptr<DigitalInput> RobotMap::shooterLimit;
+
 void RobotMap::init() {
     LiveWindow *lw = LiveWindow::GetInstance();
 
@@ -59,4 +61,6 @@ void RobotMap::init() {
 	ledRelay3->Set(Relay::kOff);
 	ledRelay4.reset(new Relay(3, Relay::kReverseOnly));
 	ledRelay4->Set(Relay::kOff);
+
+	shooterLimit.reset(new DigitalInput(SHOOTER_LIMIT_SWITCH));
 }

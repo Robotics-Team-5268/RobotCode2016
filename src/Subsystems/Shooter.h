@@ -10,6 +10,7 @@ private:
 	// It's desirable that everything possible is private except
 	// for methods that implement subsystem capabilities
 	std::shared_ptr<CANTalon> shooterCANTalon;
+	std::shared_ptr<DigitalInput> shooterLimit;
 public:
 	Shooter();
 	void InitDefaultCommand();

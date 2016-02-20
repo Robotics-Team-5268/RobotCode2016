@@ -8,9 +8,10 @@
 #define DRIVE_SPEED_CONTROLLER_3_CHANNEL 		2   //front left
 #define DRIVE_SPEED_CONTROLLER_4_CHANNEL 		3	//back left
 #define SHOOTER_SPEED_CONTROLLER_CHANNEL 		9
-#define FETCHER_WHEEL_SPEED_CONTROLLER_CHANNEL 	7   //
+#define FETCHER_WHEEL_SPEED_CONTROLLER_CHANNEL 	4   //
 #define FETCHER_SPEED_CONTROLLER_CHANNEL 		6   //
 #define GYRO_SPI_PORT 							SPI::kOnboardCS0
+#define SHOOTER_LIMIT_SWITCH					9
 
 class RobotMap {
 public:
@@ -29,6 +30,8 @@ public:
 	static std::shared_ptr<Relay> ledRelay2;
 	static std::shared_ptr<Relay> ledRelay3;
 	static std::shared_ptr<Relay> ledRelay4;
+
+	static std::shared_ptr<DigitalInput> shooterLimit;
 
 	static void init();
 };

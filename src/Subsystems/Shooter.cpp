@@ -3,6 +3,7 @@
 
 Shooter::Shooter() : Subsystem("Shooter"){
     shooterCANTalon = RobotMap::shooterSpeedController;
+    shooterLimit = RobotMap::shooterLimit;
 }
 void Shooter::AddSmartDashboardItems()
 {
@@ -17,7 +18,8 @@ void Shooter::setSpeed(double sp){
 	shooterCANTalon->Set(sp);
 }
 bool Shooter::getLimitSwitch(){
-	return shooterCANTalon->IsFwdLimitSwitchClosed();
+	// Using the reverse limit switch because that is the way it was wired
+	return !shooterLimit->Get();
 }
 void Shooter::resetPosition(){
 	shooterCANTalon->SetPosition(0);
