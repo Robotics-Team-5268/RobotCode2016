@@ -24,7 +24,6 @@ void Rotate::Execute() {
 		SmartDashboard::PutNumber("D", pid->GetD());
 		SmartDashboard::PutNumber("F", pid->GetF());
 	}else{
-		/*
 		pid = new PIDController(
 							SmartDashboard::GetNumber("P", .03),
 							SmartDashboard::GetNumber("I", .005),
@@ -33,38 +32,33 @@ void Rotate::Execute() {
 							drive->getGyro(),
 							new RotatePIDOutput());
 		pid->SetInputRange(-180, 180);
-		pid->SetOutputRange(-.5, .5);
+		pid->SetOutputRange(-.75, .75);
 		pid->SetAbsoluteTolerance(3);
 		pid->Enable();
 		pid->SetSetpoint(degrees);
-		*/
 	}
 
 
-	/*
-	if(degrees - fmod(Robot::drive->returnAngle(), 360) > 0 && degrees - fmod(Robot::drive->returnAngle(), 360) <= 180)
+	/*if(degrees - fmod(CommandBase::drive->returnAngle(), 360) > 0 && degrees - fmod(CommandBase::drive->returnAngle(), 360) <= 180)
 	{
-		Robot::drive->setMotors(.3, -.3); //Left speed is first, right speed second
+		CommandBase::drive->setMotors(.3, -.3); //Left speed is first, right speed second
 	}
 	else
 	{
-		Robot::drive->setMotors(-.3, .3);
-	}
-	*/
+		CommandBase::drive->setMotors(-.3, .3);
+	}*/
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool Rotate::IsFinished() {
-	/*
-	if(degrees - fmod(Robot::drive->returnAngle(), 360) < 5)
+	/*if(degrees - fmod(CommandBase::drive->returnAngle(), 360) < 5)
 	{
 		return true;
 	}
 	else
 	{
 		return false;
-	}
-	*/
+	}*/
 	return pid->OnTarget();
 }
 
@@ -82,6 +76,6 @@ void Rotate::Interrupted() {
 }
 void RotatePIDOutput::PIDWrite(float a)
 {
-	CommandBase::drive->setMotors(a, -a);
+	CommandBase::drive->setMotors(-a, a);
 }
 RotatePIDOutput::~RotatePIDOutput(){}

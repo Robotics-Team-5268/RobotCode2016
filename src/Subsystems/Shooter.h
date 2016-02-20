@@ -16,6 +16,7 @@ public:
 	void InitDefaultCommand();
 	void AddSmartDashboardItems();
 	void setSpeed(double sp);
+	double getSpeed();
 	void takeInput();
 	bool getLimitSwitch();
 	void resetPosition();

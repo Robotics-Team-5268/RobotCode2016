@@ -8,7 +8,7 @@
 
 class MoveFetcher: public CommandBase {
 public:
-
+	MoveFetcher(bool oOrI, double tm, bool runW = true);
 	MoveFetcher(bool oOrI, bool runW = true); // 0 = in, 1 = out
 	virtual void Initialize();
 	virtual void Execute();
@@ -19,6 +19,8 @@ private:
 	MoveFetcher();
 	bool isOut;
 	bool runWheel;
+	std::shared_ptr<Timer> timer;
+	double seconds;
 };
 
 #endif

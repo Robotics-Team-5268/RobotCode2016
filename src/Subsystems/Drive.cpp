@@ -14,7 +14,7 @@ Drive::Drive() : Subsystem("Drive"){
     speedController2->SetInverted(true);
     speedController3->SetInverted(true);
     speedController4->SetInverted(true);
-    //gyro = RobotMap::driveGyro;
+    gyro = RobotMap::driveGyro;
 }
 void Drive::AddSmartDashboardItems()
 {
@@ -22,7 +22,7 @@ void Drive::AddSmartDashboardItems()
 	SmartDashboard::PutNumber("Speed Controller 2", speedController2->Get());
 	SmartDashboard::PutNumber("Speed Controller 3", speedController3->Get());
 	SmartDashboard::PutNumber("Speed Controller 4", speedController4->Get());
-	//SmartDashboard::PutNumber("Gyro Angle", gyro->GetAngle());
+	SmartDashboard::PutNumber("Gyro Angle", gyro->GetAngle());
 }
 void Drive::InitDefaultCommand() {
     // Set the default command for a subsystem here.
@@ -32,7 +32,14 @@ void Drive::InitDefaultCommand() {
 // here. Call these from Commands.
 
 void Drive::takeInput(){
-	robotDrive4->ArcadeDrive((-CommandBase::oi->getDriverJoystick()->GetY()), CommandBase::oi->getDriverJoystick()->GetX());
+	float X = CommandBase::oi->getDriverJoystick()->GetX();
+	float Y = -CommandBase::oi->getDriverJoystick()->GetY();
+
+	if (CommandBase::oi->getDriverButtonPressed(1)) {
+		robotDrive4->ArcadeDrive(2*Y/3, 2*X/3);
+		return;
+	}
+	robotDrive4->ArcadeDrive(Y, X);
 }
 void Drive::setMotors(float leftSpeed, float rightSpeed){
 	speedController1->Set(leftSpeed);

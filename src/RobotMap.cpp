@@ -44,8 +44,8 @@ void RobotMap::init() {
 	driveRobotDrive4->SetSensitivity(0.5);
 	driveRobotDrive4->SetMaxOutput(1.0);
 
-    //driveGyro.reset(new ADXRS450_Gyro(SPI::kOnboardCS0));
-    //driveGyro->Calibrate();
+    driveGyro.reset(new ADXRS450_Gyro(SPI::kOnboardCS0));
+    driveGyro->Calibrate();
     //lw->AddActuator("Drive", "Drive Gyro", driveGyro);
     shooterSpeedController.reset(new CANTalon(SHOOTER_SPEED_CONTROLLER_CHANNEL));
     fetcherSpeedController.reset(new CANTalon(FETCHER_SPEED_CONTROLLER_CHANNEL));

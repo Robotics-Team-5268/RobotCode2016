@@ -51,7 +51,7 @@ void Robot::TeleopInit() {
 	{
 		autonomousCommand->Cancel();
 	}
-	//CommandBase::drive->getGyro()->Reset();
+	CommandBase::drive->getGyro()->Reset();
 }
 
 void Robot::TeleopPeriodic() {

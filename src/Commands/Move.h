@@ -7,8 +7,6 @@
 #include "../Robot.h"
 
 class Move: public CommandBase {
-private:
-	Move();
 public:
 	Move( float tm, float spd );
 
@@ -19,8 +17,17 @@ public:
 	virtual void Interrupted();
 	float seconds;
 	float speed;
+	std::shared_ptr<Timer> timer;
+	PIDController* pid;
 private:
 
 };
-
+class MovePIDOutput: public PIDOutput
+{
+public:
+	MovePIDOutput(float sp);
+	virtual ~MovePIDOutput();
+	void PIDWrite(float a);
+	float speed;
+};
 #endif

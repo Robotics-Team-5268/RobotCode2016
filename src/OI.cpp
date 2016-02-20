@@ -5,6 +5,7 @@
 #include "Commands/Move.h"
 #include "Commands/MoveFetcher.h"
 #include "Commands/ShootMoveFetcher.h"
+#include "Commands/LED.h"
 #include "SmartDashboard/SmartDashboard.h"
 
 
@@ -22,9 +23,11 @@ OI::OI() {
     shooterBtns[1]->WhenPressed(new MoveFetcher(false));
     shooterBtns[2]->WhenPressed(new ShootMoveFetcher());
 
+    //driverBtns[1]->WhenPressed(new LED());
+
     // SmartDashboard Buttons
     SmartDashboard::PutData("Rotate", new Rotate(90));
-    SmartDashboard::PutData("Move", new Move(30, .3));
+    SmartDashboard::PutData("Move", new Move(3, .3));
 }
 
 std::shared_ptr<Joystick> OI::getDriverJoystick() {

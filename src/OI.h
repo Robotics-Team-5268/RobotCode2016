@@ -15,6 +15,7 @@ public:
 	std::shared_ptr<Joystick> getShooterJoystick();
 	bool getDriverButtonPressed(int btnNum);
 	bool getShooterButtonPressed(int btnNum);
+
 };
 
 #endif

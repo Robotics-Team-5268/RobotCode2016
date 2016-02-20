@@ -10,13 +10,14 @@ Shoot::Shoot(): CommandBase(), state(SwitchClosed){
 
 // Called just before this Command runs the first time
 void Shoot::Initialize() {
-	SetTimeout(20);
 }
 
 // Called repeatedly when this Command is scheduled to run
 void Shoot::Execute() {
 	SmartDashboard::PutBoolean("Shooter limit", shooter->getLimitSwitch());
-	if(!fetcher->isDrawerOut()) // In case the drawer is in while the shoot command is running.
+	// In case the drawer is in while the shoot command is running.
+	// Only the first time check
+	if(shooter->getSpeed() == 0 && !fetcher->isDrawerOut())
 	{
 			//End();
 			return;
@@ -31,7 +32,7 @@ void Shoot::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool Shoot::IsFinished() {
-	return (state == armed || !fetcher->isDrawerOut());
+	return (state == armed);
 }
 
 // Called once after isFinished returns true

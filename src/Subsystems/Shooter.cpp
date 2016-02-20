@@ -17,6 +17,9 @@ void Shooter::InitDefaultCommand() {
 void Shooter::setSpeed(double sp){
 	shooterCANTalon->Set(sp);
 }
+double Shooter::getSpeed(){
+	return shooterCANTalon->Get();
+}
 bool Shooter::getLimitSwitch(){
 	// Using the reverse limit switch because that is the way it was wired
 	return !shooterLimit->Get();
