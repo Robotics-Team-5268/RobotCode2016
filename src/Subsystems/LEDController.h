@@ -17,8 +17,9 @@ private:
 public:
 	LEDController();
 	void InitDefaultCommand();
-	void TurnOn();
-	void TurnOff();
+	void TurnOn(int num);
+	void TurnOff(int num);
+	bool IsOn(int num);
 };
 
 #endif

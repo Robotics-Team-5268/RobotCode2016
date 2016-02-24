@@ -32,7 +32,16 @@ void Shoot::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool Shoot::IsFinished() {
-	return (state == armed);
+	if(state == armed)
+	{
+		leds->TurnOn(3);
+		return true;
+	}
+	else
+	{
+		leds->TurnOff(3);
+		return false;
+	}
 }
 
 // Called once after isFinished returns true

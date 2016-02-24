@@ -5,7 +5,7 @@ std::unique_ptr<Command> Robot::autonomousCommand;
 
 void Robot::RobotInit() {
 	//start grip
-	//system("/home/lvuser/grip &");
+	system("/home/lvuser/grip &");
 
 	RobotMap::init();
 	CommandBase::init();
@@ -59,7 +59,6 @@ void Robot::TeleopPeriodic() {
 	CommandBase::drive->AddSmartDashboardItems();
 	SmartDashboard::PutBoolean("limitswitch1", CommandBase::fetcher->getLimitSwitch(1));
 	SmartDashboard::PutBoolean("limitswitch2", CommandBase::fetcher->getLimitSwitch(0));
-
 }
 
 void Robot::TestPeriodic() {
@@ -69,6 +68,4 @@ void Robot::TestInit(){
 
 }
 
-
 START_ROBOT_CLASS(Robot);
-

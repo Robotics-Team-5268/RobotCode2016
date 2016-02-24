@@ -1,6 +1,7 @@
 #include "Targeting.h"
 #include "../RobotMap.h"
 #include <cmath>
+#include "../Commands/CheckHotTarget.h"
 
 Targeting::Targeting() :
 		Subsystem("Targeting")
@@ -13,8 +14,7 @@ Targeting::Targeting() :
 
 void Targeting::InitDefaultCommand()
 {
-	// Set the default command for a subsystem here.
-	//SetDefaultCommand(new MySpecialCommand());
+	SetDefaultCommand(new CheckHotTarget());
 }
 
 bool Targeting::calculateIsHot()
@@ -80,6 +80,7 @@ bool Targeting::calculateIsHot()
 			contours.push_back(c);
 		}
 	}
+	SmartDashboard::PutNumber("ContoursNum", contours.size());
 	if(contours.size() == 0){
 		return false;
 	}
@@ -93,9 +94,12 @@ bool Targeting::calculateIsHot()
 	// 0.66439841151 is tan(33.6), the 20 is distance in
 	// feet to the goal.
 	double absDistance = ((7.0/6.0 * 360.0) / ( 2 * bestContour.height * 0.66439841151));
-	if( pow(absDistance, 2) - pow((85.0/12.0 - 1), 2) > 255 ) // Square of the max distance: 255 -- to be changed, height of tower: 7 1/12
-		return false;										  // 1 is the height of the camera--to be changed
 
+	SmartDashboard::PutNumber("AbsDist", absDistance);
 
-	return false;
+	if( pow(absDistance, 2) - pow((85.0/12.0 - 1), 2) > 255 ){ // Square of the max distance: 255 -- to be changed, height of tower: 7 1/12
+		return false;										   // 1 is the height of the camera--to be changed
+	}
+
+	return true;
 }

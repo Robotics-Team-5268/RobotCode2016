@@ -1,6 +1,10 @@
 #include "LED.h"
 
-LED::LED()
+LED::LED(): num(1)
+{
+	Requires(leds.get());
+}
+LED::LED(int x): num(x)
 {
 	Requires(leds.get());
 }
@@ -14,7 +18,7 @@ void LED::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void LED::Execute()
 {
-	leds->TurnOn();
+	leds->IsOn(num) ? leds->TurnOff(num) : leds->TurnOn(num);
 }
 
 // Make this return true when this Command no longer needs to run execute()
@@ -26,7 +30,7 @@ bool LED::IsFinished()
 // Called once after isFinished returns true
 void LED::End()
 {
-	leds->TurnOff();
+
 }
 
 // Called when another command which requires one or more of the same

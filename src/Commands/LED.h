@@ -9,11 +9,13 @@ class LED: public CommandBase
 {
 public:
 	LED();
+	LED(int x);
 	void Initialize();
 	void Execute();
 	bool IsFinished();
 	void End();
 	void Interrupted();
+	int num;
 };
 
 #endif

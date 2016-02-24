@@ -11,11 +11,9 @@ Autonomous::Autonomous() : CommandGroup("Autonomous") {
 	// that it can ensure an instance is constructed.
 	// Requires(Robot::drive.get());
 	AddSequential(new MoveFetcher(true, false));
-	AddSequential(new MoveFetcher(false, 1.5, false));
-	AddSequential(new Move(1,.3));
-	AddSequential(new Rotate(90));
+	AddSequential(new MoveFetcher(false, 1, false));
+	AddSequential(new Move(6, .2831853072));
+	AddSequential(new Rotate(45));
+	AddSequential(new Move(3, .1415192657));
 	AddSequential(new ShootMoveFetcher());
 }
-
-
-

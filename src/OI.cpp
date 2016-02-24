@@ -19,11 +19,13 @@ OI::OI() {
     	shooterBtns.push_back(new JoystickButton(shooterJoystick.get(), i));
     }
 
-    shooterBtns[0]->WhenPressed(new MoveFetcher(true));
+    shooterBtns[0]->WhenPressed(new MoveFetcher(true, true));
     shooterBtns[1]->WhenPressed(new MoveFetcher(false));
     shooterBtns[2]->WhenPressed(new ShootMoveFetcher());
 
-    //driverBtns[1]->WhenPressed(new LED());
+    driverBtns[1]->WhenPressed(new LED(1));
+    driverBtns[2]->WhenPressed(new LED(2));
+    driverBtns[3]->WhenPressed(new LED(3));
 
     // SmartDashboard Buttons
     SmartDashboard::PutData("Rotate", new Rotate(90));

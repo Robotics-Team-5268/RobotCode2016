@@ -43,6 +43,11 @@ void MoveFetcher::Execute() {
 	if(!fetcher->checkIfFinished(isOut)){
 		fetcher->setCANTalonSpeed(isOut ? .65 : -.65);
 	}
+	if(oi->getShooterButtonPressed(1)) {
+		fetcher->setTalonSpeed(-1);
+	} else if (oi->getShooterButtonPressed(2)) {
+		fetcher->setTalonSpeed(-.25);
+	}
 	if(timer){
 		if(timer->Get() == 0){
 			timer->Start();
@@ -72,15 +77,13 @@ bool MoveFetcher::IsFinished() {
 	}else{
 		return fetcher->checkIfFinished(isOut);
 	}
-	return false;//fetcher->checkIfFinished(isOut);
+	return false;
 }
 
 // Called once after isFinished returns true
 void MoveFetcher::End() {
 	fetcher->setCANTalonSpeed(0);
-	if(runWheel){
-		fetcher->setTalonSpeed(isOut ? -1 : 0);
-	}
+	fetcher->setTalonSpeed(0);
 	if(timer){
 		timer->Stop();
 		timer->Reset();
