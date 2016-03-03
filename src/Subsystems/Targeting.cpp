@@ -14,11 +14,12 @@ Targeting::Targeting() :
 
 void Targeting::InitDefaultCommand()
 {
-	SetDefaultCommand(new CheckHotTarget());
+	//SetDefaultCommand(new CheckHotTarget());
 }
 
 bool Targeting::calculateIsHot()
 {
+	/*
 	std::shared_ptr<ITable> contoursTable = gripTable->GetSubTable("Contours");
 	std::vector<double> solidity = contoursTable->GetNumberArray("solidity", llvm::ArrayRef<double>());
 	std::vector<double> area = contoursTable->GetNumberArray("area", llvm::ArrayRef<double>());
@@ -102,4 +103,6 @@ bool Targeting::calculateIsHot()
 	}
 
 	return true;
+	*/
+	return false;
 }

@@ -3,7 +3,7 @@
 
 #include "../CommandBase.h"
 #include "WPILib.h"
-
+/*
 class CheckHotTarget: public CommandBase
 {
 public:
@@ -15,5 +15,6 @@ public:
 	void Interrupted();
 	std::shared_ptr<Timer> timer;
 };
-
+*/
 #endif
+

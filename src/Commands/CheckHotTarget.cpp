@@ -1,6 +1,6 @@
 #include "CheckHotTarget.h"
 
-CheckHotTarget::CheckHotTarget()
+/*CheckHotTarget::CheckHotTarget()
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
@@ -48,4 +48,4 @@ void CheckHotTarget::End()
 void CheckHotTarget::Interrupted()
 {
 
-}
+}*/
