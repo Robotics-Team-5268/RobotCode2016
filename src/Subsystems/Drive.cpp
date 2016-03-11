@@ -10,10 +10,10 @@ Drive::Drive() : Subsystem("Drive"){
     speedController3 = RobotMap::driveSpeedController3;
     speedController4 = RobotMap::driveSpeedController4;
     robotDrive4 = RobotMap::driveRobotDrive4;
-    speedController1->SetInverted(true);
-    speedController2->SetInverted(true);
-    speedController3->SetInverted(true);
-    speedController4->SetInverted(true);
+    //speedController1->SetInverted(true);
+    //speedController2->SetInverted(true);
+    //speedController3->SetInverted(false);
+    //speedController4->SetInverted(false);
     gyro = RobotMap::driveGyro;
 }
 void Drive::AddSmartDashboardItems()
@@ -32,20 +32,20 @@ void Drive::InitDefaultCommand() {
 // here. Call these from Commands.
 
 void Drive::takeInput(){
-	float X = CommandBase::oi->getDriverJoystick()->GetX();
+	float X = -CommandBase::oi->getDriverJoystick()->GetX();
 	float Y = -CommandBase::oi->getDriverJoystick()->GetY();
 
 	if (CommandBase::oi->getDriverButtonPressed(1)) {
-		robotDrive4->ArcadeDrive(2*Y/3, 2*X/3);
+		robotDrive4->ArcadeDrive(2*Y/3, X);
 		return;
 	}
 	robotDrive4->ArcadeDrive(Y, X);
 }
 void Drive::setMotors(float leftSpeed, float rightSpeed){
-	speedController1->Set(leftSpeed);
-	speedController2->Set(leftSpeed);
-	speedController3->Set(-rightSpeed);
-	speedController4->Set(-rightSpeed);
+	speedController1->Set(-rightSpeed);
+	speedController2->Set(-rightSpeed);
+	speedController3->Set(leftSpeed);
+	speedController4->Set(leftSpeed);
 }
 float Drive::returnAngle(){
 	return gyro->GetAngle();

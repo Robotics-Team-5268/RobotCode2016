@@ -11,7 +11,8 @@
 
 class Robot : public IterativeRobot {
 public:
-	static std::unique_ptr<Command> autonomousCommand;
+	static std::unique_ptr<Autonomous> autonomousCommand;
+	std::shared_ptr<SendableChooser> autonomousChooser;
 	LiveWindow *lw = LiveWindow::GetInstance();
 
 	virtual void RobotInit();

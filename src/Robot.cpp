@@ -1,7 +1,7 @@
 
 #include "Robot.h"
 
-std::unique_ptr<Command> Robot::autonomousCommand;
+std::unique_ptr<Autonomous> Robot::autonomousCommand;
 
 void Robot::RobotInit() {
 	//start grip
@@ -13,7 +13,13 @@ void Robot::RobotInit() {
 	CommandBase::drive->safetyOff();
 
 	//instantiate the command used for the autonomous period
-	autonomousCommand.reset(new Autonomous());
+	//autonomousCommand.reset(new Autonomous());
+
+	autonomousChooser.reset(new SendableChooser());
+	autonomousChooser->AddDefault("Drive forward", new int(1));
+	autonomousChooser->AddObject("Drive and shoot (lowbar)", new int(2));
+	autonomousChooser->AddObject("Drive forward short", new int(3));
+	SmartDashboard::PutData("Autonomous", autonomousChooser.get());
   }
 
 /**
@@ -31,10 +37,9 @@ void Robot::DisabledPeriodic() {
 void Robot::AutonomousInit() {
 	//autonomousCommand.Start();
 	RobotMap::driveGyro->Reset();
-	if(autonomousCommand.get() != nullptr)
-	{
-		autonomousCommand->Start();
-	}
+	int* selection = (int*) autonomousChooser->GetSelected();
+	autonomousCommand.reset(new Autonomous(*selection));
+	autonomousCommand->Start();
 }
 
 void Robot::AutonomousPeriodic() {

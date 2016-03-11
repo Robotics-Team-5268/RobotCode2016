@@ -6,7 +6,7 @@
 
 class Autonomous: public CommandGroup{
 public:
-	Autonomous();
+	Autonomous(int selection);
 };
 
 

@@ -76,6 +76,6 @@ void Rotate::Interrupted() {
 }
 void RotatePIDOutput::PIDWrite(float a)
 {
-	CommandBase::drive->setMotors(-a, a);
+	CommandBase::drive->setMotors(a, -a);
 }
 RotatePIDOutput::~RotatePIDOutput(){}

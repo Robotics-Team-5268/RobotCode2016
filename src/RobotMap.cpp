@@ -36,8 +36,8 @@ void RobotMap::init() {
     driveSpeedController4.reset(new Talon(DRIVE_SPEED_CONTROLLER_4_CHANNEL));
     lw->AddActuator("Drive", "Speed Controller 4", (Talon&) driveSpeedController4);
     
-    driveRobotDrive4.reset(new RobotDrive(driveSpeedController1, driveSpeedController2,
-              driveSpeedController3, driveSpeedController4));
+    driveRobotDrive4.reset(new RobotDrive(driveSpeedController3, driveSpeedController4,
+              driveSpeedController1, driveSpeedController2));
     
     driveRobotDrive4->SetSafetyEnabled(false);
 	driveRobotDrive4->SetExpiration(0.1);
