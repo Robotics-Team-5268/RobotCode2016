@@ -11,20 +11,22 @@ Autonomous::Autonomous(int selection) : CommandGroup("Autonomous") {
 	// that it can ensure an instance is constructed.
 	// Requires(Robot::drive.get());
 
+	AddSequential(new ShootMoveFetcher());
+	AddSequential(new MoveFetcher(false, 1, false));
+
 	switch(selection){
 	case 1: // Drive forward
 		AddSequential(new Move(4, .4));
 		break;
 	case 2: // Drive and shoot (lowbar)
-		AddSequential(new ShootMoveFetcher());
-		AddSequential(new MoveFetcher(false, 1, false));
-		AddSequential(new Move(4, .4));
-		AddSequential(new Rotate(45));
-		AddSequential(new Move(1, .4));
+		AddSequential(new Move(3.75, .4));
+		AddSequential(new Rotate(48));
+		AddSequential(new Move(1.5, .4));
+		AddSequential(new Move(0, 0));
 		AddSequential(new ShootMoveFetcher());
 		break;
 	case 3: // Drive forward short
-		AddSequential(new Move(1.5, .4));
+		AddSequential(new Move(1.4, .4));
 		break;
 	default:
 		break;
