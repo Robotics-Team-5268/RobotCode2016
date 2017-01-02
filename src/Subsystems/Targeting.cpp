@@ -88,7 +88,7 @@ bool Targeting::calculateIsHot()
 	Contour bestContour = contours[0];
 	for(uint i = 1; i < contours.size(); i++)
 	{
-		if(bestContour.width > contours[i].width){
+		if(bestContour.width < contours[i].width){
 			bestContour = contours[i];
 		}
 	}
