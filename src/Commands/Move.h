@@ -25,9 +25,10 @@ private:
 class MovePIDOutput: public PIDOutput
 {
 public:
-	MovePIDOutput(float sp);
+	MovePIDOutput(double sp);
 	virtual ~MovePIDOutput();
-	void PIDWrite(float a);
+	void PIDWrite(double a);
+
 	float speed;
 };
 #endif

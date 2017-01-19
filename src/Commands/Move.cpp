@@ -59,11 +59,11 @@ void Move::End() {
 void Move::Interrupted() {
 	End();
 }
-MovePIDOutput::MovePIDOutput(float sp){
+MovePIDOutput::MovePIDOutput(double sp){
 	speed = sp;
 }
 
-void MovePIDOutput::PIDWrite(float a)
+void MovePIDOutput::PIDWrite(double a)
 {
 	CommandBase::drive->setMotors(a + speed, -a + speed);
 }

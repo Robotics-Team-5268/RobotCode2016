@@ -1,4 +1,3 @@
-
 #include "Robot.h"
 
 std::unique_ptr<Autonomous> Robot::autonomousCommand;
@@ -15,7 +14,7 @@ void Robot::RobotInit() {
 	//instantiate the command used for the autonomous period
 	//autonomousCommand.reset(new Autonomous());
 
-	autonomousChooser.reset(new SendableChooser());
+	autonomousChooser.reset(new SendableChooser<int*>());
 	autonomousChooser->AddDefault("Drive forward", new int(1));
 	autonomousChooser->AddObject("Drive and shoot (lowbar)", new int(2));
 	autonomousChooser->AddObject("Drive forward short", new int(3));

@@ -27,6 +27,6 @@ private:
 class RotatePIDOutput: public PIDOutput
 	{
 		virtual ~RotatePIDOutput();
-		void PIDWrite(float a);
+		void PIDWrite(double a);
 	};
 #endif
