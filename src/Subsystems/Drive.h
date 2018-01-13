@@ -8,22 +8,24 @@ class Drive: public Subsystem {
 private:
 	// It's desirable that everything possible is private except
 	// for methods that implement subsystem capabilities
-	std::shared_ptr<SpeedController> speedController1;
-	std::shared_ptr<SpeedController> speedController2;
-	std::shared_ptr<SpeedController> speedController3;
-	std::shared_ptr<SpeedController> speedController4;
+	std::shared_ptr<SpeedController> speedControllerFL;
+	std::shared_ptr<SpeedController> speedControllerFR;
+	std::shared_ptr<SpeedController> speedControllerBL;
+	std::shared_ptr<SpeedController> speedControllerBR;
 	std::shared_ptr<RobotDrive> robotDrive4;
 
-	std::shared_ptr<ADXRS450_Gyro> gyro;
+	std::shared_ptr<AnalogGyro> gyro;
 public:
 	Drive();
 	void safetyOff(){robotDrive4->SetSafetyEnabled(false);}
 	void InitDefaultCommand();
 	void AddSmartDashboardItems();
-	ADXRS450_Gyro* getGyro();
+	AnalogGyro* getGyro();
 	void setMotors(float leftSpeed, float rightSpeed);
 	float returnAngle();
 	void takeInput();
+	float oldX, oldY;
+	const float MAX_CHANGE = 0.05;
 };
 
 #endif

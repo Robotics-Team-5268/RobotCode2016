@@ -6,9 +6,7 @@
 #include "OI.h"
 #include "WPILib.h"
 #include "Subsystems/Drive.h"
-#include "Subsystems/Fetcher.h"
 #include "Subsystems/LEDController.h"
-#include "Subsystems/Shooter.h"
 #include "Subsystems/Targeting.h"
 
 /**
@@ -25,9 +23,7 @@ public:
 	// Create a single static instance of all of your subsystems
 	static std::unique_ptr<OI> oi;
 	static std::unique_ptr<Drive> drive;
-	static std::unique_ptr<Fetcher> fetcher;
 	static std::unique_ptr<LEDController> leds;
-	static std::unique_ptr<Shooter> shooter;
 	static std::unique_ptr<Targeting> targeting;
 };
 

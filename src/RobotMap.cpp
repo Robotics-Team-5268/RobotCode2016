@@ -2,56 +2,50 @@
 #include "RobotMap.h"
 #include "LiveWindow/LiveWindow.h"
 #include "PIDController.h"
+#include "WPILib.h"
 
-std::shared_ptr<SpeedController> RobotMap::driveSpeedController1;
-std::shared_ptr<SpeedController> RobotMap::driveSpeedController2;
-std::shared_ptr<SpeedController> RobotMap::driveSpeedController3;
-std::shared_ptr<SpeedController> RobotMap::driveSpeedController4;
+std::shared_ptr<SpeedController> RobotMap::speedControllerFL;
+std::shared_ptr<SpeedController> RobotMap::speedControllerFR;
+std::shared_ptr<SpeedController> RobotMap::speedControllerBL;
+std::shared_ptr<SpeedController> RobotMap::speedControllerBR;
 std::shared_ptr<RobotDrive> RobotMap::driveRobotDrive4;
 
-std::shared_ptr<ADXRS450_Gyro> RobotMap::driveGyro;
-std::shared_ptr<CANTalon> RobotMap::shooterSpeedController;
-std::shared_ptr<CANTalon> RobotMap::fetcherSpeedController;
-std::shared_ptr<Talon> RobotMap::fetcherWheelSpeedController;
+std::shared_ptr<AnalogGyro> RobotMap::driveGyro;
 
 std::shared_ptr<Relay> RobotMap::ledRelay1;
 std::shared_ptr<Relay> RobotMap::ledRelay2;
 std::shared_ptr<Relay> RobotMap::ledRelay3;
 std::shared_ptr<Relay> RobotMap::ledRelay4;
 
-std::shared_ptr<DigitalInput> RobotMap::shooterLimit;
-
 void RobotMap::init() {
     LiveWindow *lw = LiveWindow::GetInstance();
 
-    driveSpeedController1.reset(new Talon(DRIVE_SPEED_CONTROLLER_1_CHANNEL));
-    lw->AddActuator("Drive", "Speed Controller 1", (Talon&) driveSpeedController1);
+    speedControllerFL.reset(new Talon(DRIVE_SPEED_CONTROLLER_1_CHANNEL));
+    lw->AddActuator("Drive", "Speed Controller 1", (Talon&) speedControllerFL);
     
-    driveSpeedController2.reset(new Talon(DRIVE_SPEED_CONTROLLER_2_CHANNEL));
-    lw->AddActuator("Drive", "Speed Controller 2", (Talon&) driveSpeedController2);
+    speedControllerFR.reset(new Talon(DRIVE_SPEED_CONTROLLER_2_CHANNEL));
+    lw->AddActuator("Drive", "Speed Controller 2", (Talon&) speedControllerFR);
     
-    driveSpeedController3.reset(new Talon(DRIVE_SPEED_CONTROLLER_3_CHANNEL));
-    lw->AddActuator("Drive", "Speed Controller 3", (Talon&) driveSpeedController3);
+    speedControllerBL.reset(new Talon(DRIVE_SPEED_CONTROLLER_3_CHANNEL));
+    lw->AddActuator("Drive", "Speed Controller 3", (Talon&) speedControllerBL);
     
-    driveSpeedController4.reset(new Talon(DRIVE_SPEED_CONTROLLER_4_CHANNEL));
-    lw->AddActuator("Drive", "Speed Controller 4", (Talon&) driveSpeedController4);
+    speedControllerBR.reset(new Talon(DRIVE_SPEED_CONTROLLER_4_CHANNEL));
+    lw->AddActuator("Drive", "Speed Controller 4", (Talon&) speedControllerBR);
     
-    driveRobotDrive4.reset(new RobotDrive(driveSpeedController3, driveSpeedController4,
-              driveSpeedController1, driveSpeedController2));
+    //driveRobotDrive4.reset(new RobotDrive(speedControllerBL, speedControllerBR,
+              //speedControllerFL, speedControllerFR));
     
+    driveRobotDrive4.reset(new RobotDrive(speedControllerBL, speedControllerFL,
+                            speedControllerBR, speedControllerFR));
     driveRobotDrive4->SetSafetyEnabled(false);
 	driveRobotDrive4->SetExpiration(0.1);
 	driveRobotDrive4->SetSensitivity(0.5);
 	driveRobotDrive4->SetMaxOutput(1.0);
 
-    driveGyro.reset(new ADXRS450_Gyro(SPI::kOnboardCS0));
+    //driveGyro.reset(new AnalogGyro(SPI::kOnboardCS0));
+	driveGyro.reset(new AnalogGyro(0));
     driveGyro->Calibrate();
     //lw->AddActuator("Drive", "Drive Gyro", driveGyro);
-    shooterSpeedController.reset(new CANTalon(SHOOTER_SPEED_CONTROLLER_CHANNEL));
-    fetcherSpeedController.reset(new CANTalon(FETCHER_SPEED_CONTROLLER_CHANNEL));
-    fetcherWheelSpeedController.reset(new Talon(FETCHER_WHEEL_SPEED_CONTROLLER_CHANNEL));
-    //shooterSpeedController->SetControlMode(CANSpeedController::kSpeed);
-    //shooterSpeedController->SetPID(.3, .003, 3.0, 0.0);
 
     ledRelay1.reset(new Relay(0, Relay::kReverseOnly));
 	ledRelay1->Set(Relay::kOff);
@@ -61,6 +55,4 @@ void RobotMap::init() {
 	ledRelay3->Set(Relay::kOff);
 	ledRelay4.reset(new Relay(3, Relay::kReverseOnly));
 	ledRelay4->Set(Relay::kOff);
-
-	shooterLimit.reset(new DigitalInput(SHOOTER_LIMIT_SWITCH));
 }

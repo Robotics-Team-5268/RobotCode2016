@@ -14,11 +14,11 @@ void Robot::RobotInit() {
 	//instantiate the command used for the autonomous period
 	//autonomousCommand.reset(new Autonomous());
 
-	autonomousChooser.reset(new SendableChooser<int*>());
+	/*autonomousChooser.reset(new SendableChooser<int*>());
 	autonomousChooser->AddDefault("Drive forward", new int(1));
 	autonomousChooser->AddObject("Drive and shoot (lowbar)", new int(2));
 	autonomousChooser->AddObject("Drive forward short", new int(3));
-	SmartDashboard::PutData("Autonomous", autonomousChooser.get());
+	SmartDashboard::PutData("Autonomous", autonomousChooser.get());*/
   }
 
 /**
@@ -61,8 +61,6 @@ void Robot::TeleopInit() {
 void Robot::TeleopPeriodic() {
 	Scheduler::GetInstance()->Run();
 	CommandBase::drive->AddSmartDashboardItems();
-	SmartDashboard::PutBoolean("limitswitch1", CommandBase::fetcher->getLimitSwitch(1));
-	SmartDashboard::PutBoolean("limitswitch2", CommandBase::fetcher->getLimitSwitch(0));
 }
 
 void Robot::TestPeriodic() {

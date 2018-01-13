@@ -5,23 +5,25 @@
 #include "../RobotMap.h"
 
 Drive::Drive() : Subsystem("Drive"){
-    speedController1 = RobotMap::driveSpeedController1;
-    speedController2 = RobotMap::driveSpeedController2;
-    speedController3 = RobotMap::driveSpeedController3;
-    speedController4 = RobotMap::driveSpeedController4;
+    speedControllerFL = RobotMap::speedControllerFL;
+    speedControllerFR = RobotMap::speedControllerFR;
+    speedControllerBL = RobotMap::speedControllerBL;
+    speedControllerBR = RobotMap::speedControllerBR;
     robotDrive4 = RobotMap::driveRobotDrive4;
-    //speedController1->SetInverted(true);
-    //speedController2->SetInverted(true);
-    //speedController3->SetInverted(false);
-    //speedController4->SetInverted(false);
+    speedControllerFL->SetInverted(true);
+    speedControllerFR->SetInverted(false);
+    speedControllerBL->SetInverted(true);
+    speedControllerBR->SetInverted(false);
     gyro = RobotMap::driveGyro;
+    oldY = 0.0;
+    oldX = 0.0;
 }
 void Drive::AddSmartDashboardItems()
 {
-	SmartDashboard::PutNumber("Speed Controller 1", speedController1->Get());
-	SmartDashboard::PutNumber("Speed Controller 2", speedController2->Get());
-	SmartDashboard::PutNumber("Speed Controller 3", speedController3->Get());
-	SmartDashboard::PutNumber("Speed Controller 4", speedController4->Get());
+	SmartDashboard::PutNumber("Speed Controller 1", speedControllerFL->Get());
+	SmartDashboard::PutNumber("Speed Controller 2", speedControllerFR->Get());
+	SmartDashboard::PutNumber("Speed Controller 3", speedControllerBL->Get());
+	SmartDashboard::PutNumber("Speed Controller 4", speedControllerBR->Get());
 	SmartDashboard::PutNumber("Gyro Angle", gyro->GetAngle());
 }
 void Drive::InitDefaultCommand() {
@@ -35,22 +37,34 @@ void Drive::takeInput(){
 	float X = -CommandBase::oi->getDriverJoystick()->GetX();
 	float Y = -CommandBase::oi->getDriverJoystick()->GetY();
 
-	if (CommandBase::oi->getDriverButtonPressed(1)) {
-		robotDrive4->ArcadeDrive(2*Y/3, X);
+	// Limit the acceleraion of the robot.
+	// This is done to prevent brownouts.
+	if (X > oldX + MAX_CHANGE) X = oldX + MAX_CHANGE; // MAX_CHANGE set in header file
+	else if (X < oldX - MAX_CHANGE) X = oldX - MAX_CHANGE;
+	if (Y > oldY + MAX_CHANGE) Y = oldY + MAX_CHANGE;
+	else if (Y < oldY - MAX_CHANGE) Y = oldY - MAX_CHANGE;
+
+
+	/*if (CommandBase::oi->getDriverButtonPressed1)) {
+		//robotDrive4->ArcadeDrive(2*Y/3, X);
 		return;
-	}
-	robotDrive4->ArcadeDrive(Y, X);
+	}*/
+	robotDrive4->ArcadeDrive(X, Y);
+
+	// Store these values for next time
+	oldX = X;
+	oldY = Y;
 }
 void Drive::setMotors(float leftSpeed, float rightSpeed){
-	speedController1->Set(-rightSpeed);
-	speedController2->Set(-rightSpeed);
-	speedController3->Set(leftSpeed);
-	speedController4->Set(leftSpeed);
+	//speedControllerFL->Set(-leftSpeed);
+	//speedControllerFR->Set(-rightSpeed);
+	//speedControllerBL->Set(leftSpeed);
+	//speedControllerBR->Set(rightSpeed);
 }
 float Drive::returnAngle(){
 	return gyro->GetAngle();
 }
-ADXRS450_Gyro* Drive::getGyro()
+AnalogGyro* Drive::getGyro()
 {
 	return gyro.get();
 }
